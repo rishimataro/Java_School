@@ -1,14 +1,12 @@
 package BaiThucHanhSo1;
 
-import java.util.Scanner;
-
 public class _04_HePTBacNhat {
 //	Phuong phap cong
     static void HePTBacNhat_1(float a, float b, float c, float a1, float b1, float c1) {
-        float epsilon = 1e-6f;
+        float eps = 1e-6f;
         
-        if (Math.abs(a / a1 - b / b1) < epsilon) {
-            if (Math.abs(c / c1 - b / b1) < epsilon) {
+        if (Math.abs(a / a1 - b / b1) < eps) {
+            if (Math.abs(c / c1 - b / b1) < eps) {
                 System.out.println("Hệ phương trình vô số nghiệm");
             } else {
                 System.out.println("Hệ phương trình vô nghiệm");
@@ -31,8 +29,7 @@ public class _04_HePTBacNhat {
                     y = new_c1 / new_b1;
                     x = (c - b * y) / a;
                     System.out.println("Nghiệm của hệ phương trình là:");
-                    System.out.println("x = " + x);
-                    System.out.println("y = " + y);
+                    System.out.println("x = " + x + ", y = " + y);
                 }
             } else {
                 System.out.println("Dữ liệu không hợp lệ.");
@@ -41,24 +38,30 @@ public class _04_HePTBacNhat {
     }
     
 // Phuong phap ma tran
-    static void HePTBacNhat_2(float a, float b, float c, float a1, float b1, float c1) {
+    static void HePTBacNhat_2(float a1, float b1, float c1, float a2, float b2, float c2) {
+        double d = a1*b2 - a2*b1;
+        double dx = c1*b2 - c2*b1;
+        double dy = a1*c2 - a2*c1;
     	
+    	if(d == 0) {
+    		if(dx == 0 && dy == 0) {
+    			System.out.println("Hệ phương trình vô số nghiệm");
+    		}
+    		else {
+    			System.out.println("Hệ phương trình vô nghiệm");
+    		}
+    		
+    	}
+    	else {
+    		double x = dx/d, y = dy/d;
+            System.out.println("Nghiệm của hệ phương trình là:");
+            System.out.println("x = " + x + ", y = " + y);
+    	}
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        HePTBacNhat_1(1, 2, 3, 3, -1, 4);
+        HePTBacNhat_2(4, -2, 5, 6, 3, 7);
 
-        System.out.println("Nhập hệ số của phương trình 1 (a, b, c): ");
-        float a = sc.nextFloat();
-        float b = sc.nextFloat();
-        float c = sc.nextFloat();
-
-        System.out.println("Nhập hệ số của phương trình 2 (a1, b1, c1): ");
-        float a1 = sc.nextFloat();
-        float b1 = sc.nextFloat();
-        float c1 = sc.nextFloat();
-
-        HePTBacNhat_1(a, b, c, a1, b1, c1);
-        sc.close();
     }
 }
